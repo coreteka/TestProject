@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    active: docker
+    include: default
+  data:
+    mongodb:
+      uri: mongodb://admin:RiLi9ohx@satisfyer_mongo:27018/?authMechanism=SCRAM-SHA-1
+      database: satisfyer_chat_db
+  rabbitmq:
+    host: satisfyer_rabbit_mq
+    username: admin
+    password: RiLi9ohx
+  redis:
+    host: satisfyer_redis
+    password: RiLi9ohx
+    port: 6380
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:RiLi9ohx@discovery-service:8061/eureka/

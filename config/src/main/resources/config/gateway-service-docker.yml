@@ -1,0 +1,49 @@
+spring:
+  profiles:
+    active: docker
+    include: default
+
+  cloud:
+    gateway:
+      routes:
+        - id: admin-service
+          uri: http://admin-service:8091
+          predicates:
+            - Path=/admin/**
+          filters:
+            - StripPrefix=1
+        - id: auth-service
+          uri: http://auth-service:8092
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
+        - id: user-service
+          uri: http://user-service:8093
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix=1
+        - id: chat-service-ws
+          uri: ws://chat-service:8094
+          predicates:
+            - Path=/chat-ws/**
+          filters:
+            - StripPrefix=1
+        - id: chat-service-rest
+          uri: http://chat-service:8094
+          predicates:
+            - Path=/chat/**
+          filters:
+            - StripPrefix=1
+        - id: community-share-service
+          uri: http://community-share-service:8095
+          predicates:
+            - Path=/community-share/**
+          filters:
+            - StripPrefix=1
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:RiLi9ohx@discovery-service:8061/eureka/

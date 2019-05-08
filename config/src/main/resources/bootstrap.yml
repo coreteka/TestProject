@@ -1,0 +1,11 @@
+server:
+  port: 8088
+spring:
+  profiles:
+    active: native # states that config files needed to start config server are stored locally
+
+security:
+  user:
+    name: admin
+    password: RiLi9ohx
+    role: SYSTEM

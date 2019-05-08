@@ -1,0 +1,87 @@
+server:
+  port: 8093
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:RiLi9ohx@localhost:8061/eureka/
+
+zuul:
+  ribbon:
+    eager-load:
+      enabled: true
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+
+spring:
+  http:
+    multipart:
+      max-file-size: 15Mb
+      max-request-size: 15Mb
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/satisfyer_users_db
+    username: postgres
+    password: asfigu
+    databaseName:
+    serverName:
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      idle-timeout: 10000
+      maximum-pool-size: 50
+      minimum-idle: 20
+      pool-name: HikariPool
+      auto-commit: false
+    jpa:
+      database: postgresql
+      show-sql: false
+      #        generate-ddl: true
+      hibernate:
+        ddl-auto: validate
+        naming:
+          strategy: org.hibernate.cfg.EJB3NamingStrategy
+      properties:
+        hibernate.cache.use_second_level_cache: false
+        hibernate.cache.use_query_cache: false
+        hibernate.type: trace
+        hibernate.connection.charSet: utf-8
+        hibernate.connection.useUnicode: true
+        hibernate.connection.characterEncoding: utf-8
+
+        hibernate.show_sql: true
+        hibernate.use_sql_comments: true
+        hibernate.format_sql: true
+        hibernate.generate_statistics: true
+
+liquibase:
+  enabled: true
+  change-log: classpath:/liquibase/db.changelog-master.xml
+
+satisfyerapp:
+  authentication:
+    jwt:
+      xauthTokenHeaderName: x-auth-token
+      secret: my-secret-token-to-change-in-production
+      # Token is valid 24 hours
+      tokenValidityInSeconds: 86400
+      tokenValidityInSecondsForRememberMe: 2592000
+
+  aws:
+    key: AKIAIVHDBJ5YDTDIE4XQ
+    secret: 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
+    region: eu-west-1
+    bucket-name: satisfyer
+    s3:
+      key: AKIAI3BGDJMASWDFYUTA
+      secret: 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
+      region: eu-central-1
+      bucket-name: satisfyer-dev
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 160000000
+        readTimeout: 160000000

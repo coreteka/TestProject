@@ -1,0 +1,44 @@
+server:
+  port: 8094
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:RiLi9ohx@localhost:8061/eureka/
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+
+satisfyerapp:
+  authentication:
+    jwt:
+      xauthTokenHeaderName: x-auth-token
+      secret: my-secret-token-to-change-in-production
+      # Token is valid 24 hours
+      tokenValidityInSeconds: 86400
+  aws:
+    s3:
+      key: AKIAI3BGDJMASWDFYUTA
+      secret: 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
+      region: eu-central-1
+      bucket-name: satisfyer-dev
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://admin:RiLi9ohx@localhost:27018/?authMechanism=SCRAM-SHA-1
+      database: satisfyer_chat_db
+  rabbitmq:
+    username: admin
+    password: RiLi9ohx
+  http:
+    multipart:
+      max-file-size: 15Mb
+      max-request-size: 15Mb
+  cache:
+    type: redis
+  redis:
+    cache-null-values: false
+    time-to-live: 3600000 # hour
+    password: RiLi9ohx
